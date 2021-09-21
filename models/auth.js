@@ -7,10 +7,8 @@ const User = require("../models/schemas/user");
 
 const loginModel = (formdata)=>{
     return new Promise((resolve)=>{
-        try{
             User
                 .findOne({email:formdata.email})
-                .catch(err=>{throw err})
                 .then(user=>{
                     console.log(user)
                     if(!user.active){
@@ -35,20 +33,20 @@ const loginModel = (formdata)=>{
                         })
                     }
                 })
-        }catch(err){
-            if(err.name=="ValidationError"){
-                console.log("err from validations",err)
-                resolve({
-                    status:400,
-                    message:err.toString()
+                .catch(err=>{
+                    if(err.name=="ValidationError"){
+                        console.log("err from validations",err)
+                        resolve({
+                            status:400,
+                            message:err.toString()
+                        })
+                    }else{
+                        resolve({
+                            status:500,
+                            message:err.toString()
+                        })
+                    }
                 })
-            }else{
-                resolve({
-                    status:500,
-                    message:err.toString()
-                })
-            }
-        }
     })
 }
 const logoutModel=()=>{}
