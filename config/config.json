@@ -1,0 +1,5 @@
+{
+    "dbUrl":"mongodb+srv://abhishek:abhishek@democluster.jks2i.mongodb.net/Project1?retryWrites=true&w=majority",
+    "webTokenSecurtiyKey":"MySecretKey",
+    "saltRounds":10
+}
